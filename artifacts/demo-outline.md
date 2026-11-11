@@ -1,11 +1,19 @@
 # 25-minute demonstration outline
 
-Use the verified preview `https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app` and the files named below. Times are a speaking plan, not measured durations.
+The subject is the multi-agent workflow. The live app is about 3 minutes, in the last section. Times are a speaking plan, not measured durations.
 
-1. Minutes 0–3. Say what the POC is: three fictional people, three fictional jobs, skills 70% and experience 30%. Show `docs/architecture.md` for the formula and `docs/workflow-diagram.md` for the gates.
-2. Minutes 3–7. Open the preview. Read the disclaimer. Show nine rows. Point to Ada Okonkwo / Full Stack Engineer `100.00` and Mina Chen / Data Analyst `100.00`.
-3. Minutes 7–11. Use the Candidate select for Ada Okonkwo and show three rows. Use the Job select for Data Analyst and show three rows, including Mina Chen at `100.00`. Say the page displays the API strings.
-4. Minutes 11–15. Open `GET /api/matches` from the same host. Show the nine-pair JSON and the same two `100.00` values. Mention `GET /api/matches?extra=1` returned 400 and `POST /api/matches` returned 405 during the preview check.
-5. Minutes 15–19. Open `artifacts/failures/QA-001-attempt-2.md`. Say TRACE was expected to return 400 and the installed Next.js server returned 500. Say that failure is still a failure. Open D-015 in `docs/decisions.md` and say the human removed TRACE from the blocking suite.
-6. Minutes 19–22. Show the QA-003 counts in `artifacts/qa/report.md`: Vitest 19 passed and Playwright 19 passed. Show `artifacts/reviews/security-review.md`: no high findings. Mention the port 3000 conflict was left alone and the suite ran on port 3210.
-7. Minutes 22–25. Show `artifacts/qa/preview-check.md` and the README URL. Say the first deploy command came back as production even with `--target preview`, those aliases were removed, and the recorded URL is the preview deployment. Say cost and token usage were unavailable. Stop for questions. Do not claim a production domain or a pushed remote.
+Repository: https://github.com/angelsoftph/agentic-jobmatch
+
+Planning commit: `a3f6ed771901c0845556be8abd2890aeba975c25`
+
+Implementation commit: `d0e72a34fcc21c4bba4948fb0a8c1ef43daeaf7b`
+
+Preview, for the short app segment only: https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app
+
+1. Minutes 0–4. Orchestration. Open `AGENTS.md` and `docs/workflow-diagram.md`. Say the parent session orders work, checks path ownership, and stops at human gates. Specialists do not install, commit, push, or deploy. The orchestrator does not write feature code.
+2. Minutes 4–8. Specialist agents and reusable skills. Show `.cursor/agents/` for requirements, backend, frontend, QA, and the read-only security reviewer. Show `.cursor/skills/contract-first`, `acceptance-verification`, and `failure-recovery`. Say each specialist is told to read the skill, and the platform does not prove that it did.
+3. Minutes 8–12. Parallel delegation and written handoffs. Show `prompts/delegations/` for the exact prompts. Say backend and frontend ran together after G2, then QA and security ran together. Open one handoff in `artifacts/handoffs/` and the matching native result in `artifacts/native/`.
+4. Minutes 12–16. Independent verification. Open `artifacts/qa/report.md`: QA-003 recorded Vitest 19 passed and Playwright 19 passed for AC-01 through AC-15. Open `artifacts/reviews/security-review.md`: no high findings. Say the orchestrator evaluated AC-16 only after both reports existed. The first AC-16 evaluation failed.
+5. Minutes 16–20. Recovery. Open `artifacts/failures/QA-001-attempt-1.md` and `artifacts/failures/QA-002.md` for the port 3000 conflicts. The other process was not stopped, and the suite later used port 3210. Open `artifacts/failures/QA-001-attempt-2.md`: TRACE expected 400 and Next.js returned 500. That result stays a failure. A task has three attempts. Exhaustion stops for a human.
+6. Minutes 20–22. Human approvals. Walk G0, G0-git, G1, G2, the D-015 TRACE clarification, G3, and G4 in `docs/decisions.md` and `docs/execution-log.md`. Say no push occurred during G4. Publication came afterward, at the two commits above. Token usage and cost were unavailable.
+7. Minutes 22–25. Live app, about 3 minutes. Open the preview. Read the disclaimer, show nine rows, and point to Ada Okonkwo / Full Stack Engineer and Mina Chen / Data Analyst at `100.00`. Change one filter. Stop. Do not claim a production domain. The formula and the longer API checks stay in `docs/architecture.md` and `artifacts/qa/preview-check.md` for questions.

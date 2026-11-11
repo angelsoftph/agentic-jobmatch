@@ -4,7 +4,9 @@ This repository is a one-day proof of concept for a disciplined multi-agent work
 
 The verified preview is https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app
 
-The checks for that URL are in `artifacts/qa/preview-check.md`. It is a Vercel preview deployment, not a production alias. Nothing in this repo has been pushed.
+The checks for that URL are in `artifacts/qa/preview-check.md`. It is a Vercel preview deployment, not a production alias.
+
+The published repository is https://github.com/angelsoftph/agentic-jobmatch. The planning commit is `a3f6ed771901c0845556be8abd2890aeba975c25`. The implementation commit is `d0e72a34fcc21c4bba4948fb0a8c1ef43daeaf7b`. No push was part of the G4 preview. Publication happened after that gate.
 
 ## What the project demonstrates
 

@@ -1,6 +1,6 @@
 # Reflection
 
-Status: preview verified on 2026-11-11 20:36 UTC+8. Filled from `docs/execution-log.md` and the cited artifacts. Waiting for human acceptance.
+Status: preview verified on 2026-11-11 20:36 UTC+8. Filled from `docs/execution-log.md` and the cited artifacts. No push occurred during G4. Publication to GitHub was completed afterward.
 
 ## What happened
 
@@ -22,7 +22,7 @@ G4 login completed in 96671 ms. The account reported by `vercel whoami` was `bug
 
 - G0, G0-git, G1, and G2 were completed earlier in the log.
 - G3 passed under the revised criteria. QA-003 passed AC-01 through AC-15. SR-001 still has no open high finding and was not repeated. QA-003 did not edit product source.
-- G4 checks passed. AC-17 is the verified preview URL. No production alias remains assigned. Nothing was pushed.
+- G4 checks passed. AC-17 is the verified preview URL. No production alias remains assigned. No push occurred during G4.
 
 ## Evidence index
 
@@ -33,6 +33,10 @@ G4 login completed in 96671 ms. The account reported by `vercel whoami` was `bug
 - Revised AC-16: P-021
 - Security: `artifacts/reviews/security-review.md`, P-015
 - Preview: `artifacts/qa/preview-check.md`, P-022
+
+## Publication
+
+No push occurred during G4. The gate note above is that historical record. After the human accepted the repository audit, the work was published to https://github.com/angelsoftph/agentic-jobmatch. The planning commit remains `a3f6ed771901c0845556be8abd2890aeba975c25`. The implementation commit is `d0e72a34fcc21c4bba4948fb0a8c1ef43daeaf7b`.
 
 ## What to change next time
 
