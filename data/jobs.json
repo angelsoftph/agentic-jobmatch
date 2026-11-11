@@ -1,0 +1,20 @@
+[
+  {
+    "id": "job-frontend-engineer",
+    "title": "Frontend Engineer",
+    "requiredSkills": ["TypeScript", "React", "CSS"],
+    "minYearsExperience": 3
+  },
+  {
+    "id": "job-fullstack-engineer",
+    "title": "Full Stack Engineer",
+    "requiredSkills": ["TypeScript", "React", "Node.js"],
+    "minYearsExperience": 4
+  },
+  {
+    "id": "job-data-analyst",
+    "title": "Data Analyst",
+    "requiredSkills": ["Python", "SQL"],
+    "minYearsExperience": 2
+  }
+]

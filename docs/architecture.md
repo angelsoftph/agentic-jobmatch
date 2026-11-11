@@ -292,7 +292,7 @@ The approved seed is inside these bounds. The upper bound stops a replaced file 
 
 Each route module exports `GET` only. The app does not export `HEAD`, `OPTIONS`, `POST`, `PUT`, `PATCH`, or `DELETE`. Next.js fills some of those in. Calling the `GET` function from a unit test does not show that behavior. Method checks run against the running server.
 
-This matrix is from Next.js source read on 2026-11-11, not from a run of this app. `auto-implement-methods.ts` on the Next.js canary branch starts every unimplemented method at `405` with a null body, then replaces `HEAD` and `OPTIONS`. `http.ts` in the same tree lists the method tokens `GET`, `HEAD`, `OPTIONS`, `POST`, `PUT`, `DELETE`, and `PATCH`. The route module calls `handleBadRequestResponse` when the token is outside that list. This planning session did not retrieve the body of `handleBadRequestResponse`. The integration test records the status the installed version actually returns for one token outside the list. The planning target for that case is `400`. If the installed version differs, stop and report the status. Do not add a handler to force a different code.
+This matrix is from Next.js source read on 2026-11-11, not from a run of this app. `auto-implement-methods.ts` on the Next.js canary branch starts every unimplemented method at `405` with a null body, then replaces `HEAD` and `OPTIONS`. `http.ts` in the same tree lists the method tokens `GET`, `HEAD`, `OPTIONS`, `POST`, `PUT`, `DELETE`, and `PATCH`. Those seven methods are the blocking contract. `TRACE` is documented under "Known framework limitation: TRACE" and is not an acceptance requirement.
 
 | Request | Who answers | Expected result |
 | --- | --- | --- |
@@ -302,7 +302,6 @@ This matrix is from Next.js source read on 2026-11-11, not from a run of this ap
 | `HEAD` on those paths | Framework, by calling the `GET` handler | Same status as `GET` for that URL. Body empty. Node strips the body when the request method is `HEAD`. |
 | `OPTIONS` on those paths | Framework | 204, empty body, `Allow: GET, HEAD, OPTIONS`. Query parameters are not validated because `GET` does not run. |
 | `POST`, `PUT`, `PATCH`, `DELETE` | Framework | 405, empty body. No `ErrorBody` and no `code`. |
-| Any other method token, such as `TRACE` | Framework | Planning target 400. Confirm on the installed version. |
 
 `GET /api/matches` query:
 
@@ -370,9 +369,14 @@ Playwright, `retries: 0`, base URL `http://127.0.0.1:3000`, against `next start`
 - `HEAD /api/candidates` returns 200 with an empty body
 - `OPTIONS /api/matches` returns 204 and `Allow: GET, HEAD, OPTIONS`
 - `POST` and `DELETE` on `/api/matches` return 405 with an empty body
-- one method token outside the seven listed above, if the client can send it
 
-That is the whole HTTP suite. It does not add routes or fields.
+That is the blocking HTTP suite. It does not add routes or fields.
+
+## Known framework limitation: TRACE
+
+`TRACE` is outside the supported HTTP methods for this Next.js route-handler POC. On 2026-11-11, QA attempt 2 sent `TRACE /api/matches` to Next.js 16.4.6. The server returned HTTP 500 and logged `TypeError: 'TRACE' HTTP method is unsupported.` The spec expected 400. That run failed and is preserved in `artifacts/failures/QA-001-attempt-2.md` and `docs/execution-log.md`. It is not an acceptance pass.
+
+The application does not add a method filter or a `TRACE` handler. The human approved that limit on 2026-11-11. See D-015 in `docs/decisions.md`.
 
 ## Preview
 

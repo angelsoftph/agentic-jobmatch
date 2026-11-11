@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cand-ada-okonkwo",
+    "name": "Ada Okonkwo",
+    "skills": ["TypeScript", "React", "Node.js", "Accessibility"],
+    "yearsExperience": 6
+  },
+  {
+    "id": "cand-mina-chen",
+    "name": "Mina Chen",
+    "skills": ["Python", "SQL", "Data modeling"],
+    "yearsExperience": 3
+  },
+  {
+    "id": "cand-jordan-hale",
+    "name": "Jordan Hale",
+    "skills": ["React", "CSS", "Figma"],
+    "yearsExperience": 1
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "status": "preview_verified",
+  "gate": "G3 passed under the revised criteria. G4 preview checks passed. Waiting for human acceptance.",
+  "previewUrl": "https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app",
+  "previewVerified": true,
+  "planningCommit": "a3f6ed771901c0845556be8abd2890aeba975c25",
+  "cost": "unavailable",
+  "tokenUsage": "unavailable",
+  "tests": [
+    {
+      "id": "P-016",
+      "command": "npm test and npm run test:e2e",
+      "result": "Vitest 19 passed. Playwright 19 of 20 passed. TRACE /api/matches expected 400 and received 500. This result stays a failure."
+    },
+    {
+      "id": "P-019",
+      "command": "npm test",
+      "result": "Vitest 19 passed. npm run test:e2e was not run because port 3000 was occupied by another application."
+    },
+    {
+      "id": "P-020",
+      "command": "npm test and npm run test:e2e",
+      "result": "Vitest 2 files, 19 passed, exit 0, start 20:19:27, duration 165ms. Playwright 19 passed, 0 failed, exit 0, 6.2s, port 3210. TRACE was not sent."
+    }
+  ],
+  "reviews": [
+    {
+      "id": "SR-001",
+      "result": "no high findings. Not repeated after D-015 because the application, dependencies, and data flow were unchanged."
+    },
+    {
+      "id": "AC-16",
+      "firstEvaluation": "P-017 fail, because AC-08 failed on TRACE",
+      "revisedEvaluation": "P-021 pass"
+    }
+  ],
+  "tasks": [
+    { "id": "P-014", "taskId": "QA-001", "result": "blocked", "testResult": "port 3000 occupied before specs" },
+    { "id": "P-015", "taskId": "SR-001", "result": "no high findings" },
+    { "id": "P-016", "taskId": "QA-001", "result": "fail", "testResult": "TRACE expected 400, received 500" },
+    { "id": "P-017", "taskId": "AC-16", "result": "fail" },
+    { "id": "P-018", "taskId": "D-015", "result": "contract revised" },
+    { "id": "P-019", "taskId": "QA-002", "result": "blocked", "agentId": "27da2d7f-3b76-42a1-9ef9-84c58608bb2e" },
+    { "id": "P-020", "taskId": "QA-003", "result": "pass", "agentId": "ccaf9f2b-af2c-4815-90c1-ebed2e5d7f7d" },
+    { "id": "P-021", "taskId": "AC-16", "result": "pass" },
+    { "id": "P-022", "taskId": "G4", "result": "preview_verified", "previewUrl": "https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app" }
+  ]
+}

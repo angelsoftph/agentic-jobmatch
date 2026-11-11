@@ -158,8 +158,22 @@ QA independently verifies AC-01 through AC-15. The orchestrator evaluates AC-16 
 
 Formula, seed, roster, and the parallel windows are unchanged.
 
+## G1 on 2026-11-11
+
+Status: passed by the orchestrator. Not a test run.
+
+The requirements architect handoff RA-001 matches `docs/architecture.md` on the formula, the nine fixture rows, the seed, and the error codes. Accepted non-behavioral wording: the All option omits its query key. No backend or frontend feature code was written.
+
+## D-015 TRACE is outside the POC contract
+
+Status: approved by the human on 2026-11-11 20:13 UTC+8.
+
+The original expectation was that a method token outside `GET`, `HEAD`, `OPTIONS`, `POST`, `PUT`, `PATCH`, and `DELETE` would return HTTP 400. QA attempt 2 sent `TRACE /api/matches` to the installed Next.js 16.4.6 server. The response was HTTP 500, and the server logged `TypeError: 'TRACE' HTTP method is unsupported.` Nineteen other Playwright tests passed. That failure stays in `artifacts/failures/QA-001-attempt-2.md` and in `docs/execution-log.md` entry P-016. It is not marked passed.
+
+`TRACE` is a framework limitation of this route-handler POC, not application behavior the matcher is required to implement. An upstream filter or custom handler was rejected because it would add application code only to reshape a method this one-day POC does not support. The human approved removing `TRACE` from the blocking acceptance suite and leaving the GET, HEAD, OPTIONS, POST, PUT, PATCH, DELETE, malformed-query, and unknown-id requirements in place.
+
+The security review SR-001 did not rely on a `TRACE` status. Its conclusion of no open high finding still stands, so that review is not repeated for this contract change.
+
 ## Open items that need a human
 
-- G0 is approved. G0-git is the authorized planning-baseline commit, then stop at G2 for install approval.
-- Approve the install manifest at G2.
-- Approve Vercel authentication and one preview deploy after local QA (G4).
+- G4 preview checks passed on 2026-11-11 20:36 UTC+8. The verified URL is `https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app`. Human acceptance is the remaining stop.

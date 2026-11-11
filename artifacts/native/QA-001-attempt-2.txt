@@ -1,0 +1,7 @@
+Task tool result for QA-001 attempt 2. Agent ID: f2e10785-4b16-4e18-b81f-0a1a1bd88b90
+
+QA-001 attempt 2 is a fail. AC-08 fails because TRACE /api/matches returned 500. The spec expected 400. No product files were changed. AC-16 and AC-17 are unassigned.
+
+npm test passed. Exit code 0. Vitest v5.1.0: Test Files 2 passed (2). Tests 19 passed (19). Start at 19:20:35. Duration 201ms.
+
+npm run test:e2e failed. Exit code 1. Playwright ran 20 tests using 5 workers against http://127.0.0.1:3210. 19 passed (8.6s). One failed: tests/e2e/api.spec.ts:188:3. Expected status 400 and received 500. The server logged TypeError: 'TRACE' HTTP method is unsupported.

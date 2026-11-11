@@ -1,0 +1,15 @@
+Task tool result for FE-001. This is the text returned to the orchestrator.
+
+Agent ID: aeb0db50-3b06-4cb9-842b-522db8f38f13
+
+FE-001 is ready. The results page loads candidates, jobs, and matches from the same-origin API and shows the returned overall, skill, experience, label, and missing skills. Playwright was not run.
+
+Files written:
+- src/app/layout.tsx
+- src/app/page.tsx
+- src/app/globals.css
+- tests/e2e/matches.spec.ts
+- tests/e2e/error-retry.spec.ts
+- artifacts/handoffs/FE-001.md
+
+Checks run: not run. No browser check is claimed.

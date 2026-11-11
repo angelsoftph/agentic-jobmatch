@@ -1,0 +1,88 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: #ffffff;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+p {
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 24rem;
+  font-weight: 600;
+}
+
+select,
+button {
+  font: inherit;
+}
+
+select {
+  font-weight: 400;
+}
+
+button {
+  width: fit-content;
+  padding: 0.4rem 0.8rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #cccccc;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f4f4f4;
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

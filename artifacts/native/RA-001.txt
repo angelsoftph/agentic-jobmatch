@@ -1,0 +1,22 @@
+Task tool result for RA-001. This is the text returned to the orchestrator, not a reconstructed transcript.
+
+Agent ID: 717f1b93-7aeb-4c58-9360-5c2d66472f48
+
+Status: ready. RA-001 attempt 1 wrote the contract without changing the formula, weights 70 and 30, scale 10000, fixture numbers, seed people, or error codes.
+
+Files written:
+
+- docs/requirements.md
+- docs/acceptance-criteria.md
+- data/candidates.json
+- data/jobs.json
+- src/types/domain.ts
+- artifacts/handoffs/RA-001.md
+
+QA still verifies AC-01 through AC-15. The orchestrator evaluates AC-16. AC-17 remains the preview gate. No id is marked passed. A seed JSON parse confirmed the three candidates and three jobs. No Vitest or Playwright run.
+
+Wording choices that do not change behavior:
+
+- The "All" option omits that side's query key. An empty query value is already bad_request in the architecture, so "All" is not sent as an empty id.
+- Below-half 3333 and above-half 6667 are the existing fixture inputs divRoundHalfUp(10000, 3) and divRoundHalfUp(20000, 3). No new helper case was added.
+- src/types/domain.ts adds a file comment only. Error codes remain bad_request, not_found, and seed_invalid.

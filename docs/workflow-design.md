@@ -103,7 +103,7 @@ Follow `.cursor/skills/failure-recovery/SKILL.md`.
 | Git command refused for ownership | Stop. Do not bypass `safe.directory`. Do not start implementation. |
 | Preview command fails or verification fails | Quote the output. Leave the verified URL empty. One retry of the same preview deploy is allowed. A second failure escalates to the human. |
 | Retry budget exhausted | Stop the fix loop. Escalate to the human. Still write the reflection and the run summary. |
-| Installed Next.js method status differs from the planning target | Stop and report the observed status. Do not add a handler to force the target. |
+| Installed Next.js method status differs from the contract for `GET`, `HEAD`, `OPTIONS`, `POST`, `PUT`, `PATCH`, or `DELETE` | Stop and report the observed status. Do not add a handler to force the target. `TRACE` is excluded by D-015. |
 
 Attempt count is per task id. A QA failure that sends work back to the backend counts against the backend task, not against QA.
 
