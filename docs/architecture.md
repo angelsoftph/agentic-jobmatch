@@ -211,6 +211,8 @@ overallBasis = divRoundHalfUp(70 * skillBasis + 30 * experienceBasis, 100)
 
 `skillBasis`, `experienceBasis`, and `overallBasis` are integers from 0 through 10000.
 
+The approved formula rounds `skillBasis` and `experienceBasis` first, then rounds the weighted sum of those already rounded integers. `formatBasis` splits that integer into a two-decimal string and does not round again. The trade-off is that `overallBasis` can differ from one rounding of an unrounded weighted ratio. Later remediation does not change this order.
+
 Format a basis as a string without floating-point conversion:
 
 ```text
@@ -378,9 +380,17 @@ That is the blocking HTTP suite. It does not add routes or fields.
 
 The application does not add a method filter or a `TRACE` handler. The human approved that limit on 2026-11-11. See D-015 in `docs/decisions.md`.
 
+The HTTP 500 is also a client restriction. The Fetch `Request` constructor rejects `TRACE` before Next.js can apply its 400 response for a method token outside `GET`, `HEAD`, `OPTIONS`, `POST`, `PUT`, `PATCH`, and `DELETE`. The server log was `TypeError: 'TRACE' HTTP method is unsupported.` `PROPFIND` is a method the client can send. A post-implementation test on 2026-11-11 observed HTTP 400 and an empty body for `PROPFIND /api/matches`. That observation does not mark the original TRACE failure as a pass.
+
 ## Preview
 
-After local QA and security review pass, and after the human approves gate G4, the orchestrator deploys a Vercel preview. The deployment steps and the rule for recording the URL are in `docs/workflow-design.md`. No preview URL exists yet.
+After local QA and security review pass, and after the human approves gate G4, the orchestrator deploys a Vercel preview. The deployment steps and the rule for recording the URL are in `docs/workflow-design.md`.
+
+Planning state: this section was written before a preview existed.
+
+Implementation result: G4 verified https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app. The checks are in `artifacts/qa/preview-check.md`.
+
+Post-implementation: the remediation did not deploy again.
 
 ## Security boundaries in the design
 

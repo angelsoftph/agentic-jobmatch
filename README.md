@@ -85,6 +85,10 @@ On the page, the disclaimer is shown with nine matches. Ada Okonkwo / Full Stack
 
 Token usage and cost were `unavailable` for every recorded task. No billing figure was supplied.
 
+## After publication
+
+Commit `60af5a430a3936c609bc4a5fb166a9ba8a14b109` corrected documentation only. A later remediation, recorded in `artifacts/remediation/report.md`, added filter tests and a `PROPFIND` check. Those tests are not part of the original QA-003 count of 19 Playwright tests. The original TRACE failure is unchanged. No application behavior was changed in that remediation, and it was not deployed.
+
 ## Limitations
 
 - `TRACE /api/matches` returned HTTP 500 from Next.js 16.4.6, with `TypeError: 'TRACE' HTTP method is unsupported.` The spec had expected 400. That run is preserved in `artifacts/failures/QA-001-attempt-2.md`. D-015 removed TRACE from the blocking suite. The application was not given a TRACE handler. The later QA-003 run, 19 Playwright tests passed, did not send TRACE and does not replace that failure.

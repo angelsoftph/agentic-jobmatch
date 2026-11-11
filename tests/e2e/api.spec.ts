@@ -54,6 +54,26 @@ const matchOrder = [
   { candidateId: "cand-jordan-hale", jobId: "job-data-analyst", overall: "15.00" },
 ]
 
+type MatchIdentity = {
+  candidateId: string
+  jobId: string
+  overall: string
+}
+
+async function readMatchIdentities(
+  request: APIRequestContext,
+  url: string,
+): Promise<MatchIdentity[]> {
+  const response = await request.get(url)
+  expect(response.status()).toBe(200)
+  const body = (await response.json()) as { matches: MatchIdentity[] }
+  return body.matches.map((match) => ({
+    candidateId: match.candidateId,
+    jobId: match.jobId,
+    overall: match.overall,
+  }))
+}
+
 async function expectJsonError(
   request: APIRequestContext,
   url: string,
@@ -110,6 +130,52 @@ test.describe("AC-03 matches", () => {
         overall: match.overall,
       })),
     ).toEqual(matchOrder)
+  })
+})
+
+test.describe("match filters", () => {
+  test("GET /api/matches?candidateId=cand-ada-okonkwo returns Ada's three matches", async ({
+    request,
+  }) => {
+    const matches = await readMatchIdentities(
+      request,
+      "/api/matches?candidateId=cand-ada-okonkwo",
+    )
+    expect(matches).toHaveLength(3)
+    expect(matches).toEqual([
+      { candidateId: "cand-ada-okonkwo", jobId: "job-fullstack-engineer", overall: "100.00" },
+      { candidateId: "cand-ada-okonkwo", jobId: "job-frontend-engineer", overall: "76.67" },
+      { candidateId: "cand-ada-okonkwo", jobId: "job-data-analyst", overall: "30.00" },
+    ])
+    for (const match of matches) {
+      expect(match.candidateId).toBe("cand-ada-okonkwo")
+    }
+  })
+
+  test("GET /api/matches?jobId=job-data-analyst returns that job's three matches", async ({
+    request,
+  }) => {
+    const matches = await readMatchIdentities(request, "/api/matches?jobId=job-data-analyst")
+    expect(matches).toHaveLength(3)
+    expect(matches).toEqual([
+      { candidateId: "cand-mina-chen", jobId: "job-data-analyst", overall: "100.00" },
+      { candidateId: "cand-ada-okonkwo", jobId: "job-data-analyst", overall: "30.00" },
+      { candidateId: "cand-jordan-hale", jobId: "job-data-analyst", overall: "15.00" },
+    ])
+    for (const match of matches) {
+      expect(match.jobId).toBe("job-data-analyst")
+    }
+  })
+
+  test("GET /api/matches with both ids returns the single pair", async ({ request }) => {
+    const matches = await readMatchIdentities(
+      request,
+      "/api/matches?candidateId=cand-ada-okonkwo&jobId=job-data-analyst",
+    )
+    expect(matches).toHaveLength(1)
+    expect(matches).toEqual([
+      { candidateId: "cand-ada-okonkwo", jobId: "job-data-analyst", overall: "30.00" },
+    ])
   })
 })
 
@@ -185,4 +251,9 @@ test.describe("AC-08 query errors and methods", () => {
     })
   }
 
+  test("PROPFIND /api/matches returns 400", async ({ request }) => {
+    const response = await request.fetch("/api/matches", { method: "PROPFIND" })
+    expect(response.status()).toBe(400)
+    expect(await response.text()).toBe("")
+  })
 })

@@ -492,3 +492,25 @@ Entries P-001 through P-003 were written before this format. Their missing field
 - decision: The verified URL is the preview deployment `dpl_2rkSWN7UuCfBjTSo842fmiZz7For`. `--prod` was not used. No remote was pushed. `.vercel` and `.env.local` are ignored.
 - result: preview_verified
 - notes: The 20:30 command used `--target preview` and the CLI still returned target production for `dpl_5ivwshQAPh9LYLGv3Xp3Cq9jd7mV`. Those production aliases were removed and that URL is not the verified preview.
+
+### P-023
+
+- task id: Vercel-protection-decision
+- agent id: not applicable
+- role: orchestrator
+- start: 2026-11-11 22:34 +08:00
+- end: 2026-11-11 22:37:21 +08:00
+- duration: not measured as a single elapsed command time
+- input artifacts: `artifacts/reviews/security-review-remediation.md`; `prompts/g4-approval.md`; `docs/execution-log.md` P-022
+- output artifacts: `artifacts/reviews/security-post-audit-vercel.md`; this entry; `docs/decisions.md` D-016
+- test result: unauthenticated preview `GET /` 200 with the fictional-profile disclaimer. `GET /api/candidates` 200 with 3 candidates. The deleted production URL and the two earlier alias hostnames returned 404.
+- review result: The human accepted public access for this POC on 2026-11-11. That acceptance does not authorize the SSO disable recorded in P-022. SR-002 is unchanged.
+- retry count: 0
+- model: not applicable
+- token usage: unavailable
+- cost: unavailable
+- native evidence: command output from this session. The bypass secret was not copied.
+- action: Verified `dpl_5ivwshQAPh9LYLGv3Xp3Cq9jd7mV` was target production, then removed that deployment id only. Revoked the single automation protection-bypass secret created at 2026-11-11 20:33:01 +08:00. Did not enable SSO, deploy, change aliases, or edit application code.
+- decision: Public access stays for this disposable POC only. The preview `dpl_2rkSWN7UuCfBjTSo842fmiZz7For` stays. The accidental production deployment is removed.
+- result: preview_still_public
+- notes: P-022 is unchanged. No commit or push was made in this entry.

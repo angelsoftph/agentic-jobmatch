@@ -177,3 +177,13 @@ The security review SR-001 did not rely on a `TRACE` status. Its conclusion of n
 ## Open items that need a human
 
 - G4 preview checks passed on 2026-11-11 20:36 UTC+8. The verified URL is `https://jobmatch-p4vvrid11-freds-projects-6ef41a64.vercel.app`. Human acceptance is the remaining stop.
+
+## D-016 Public access for this POC
+
+Status: approved by the human on 2026-11-11 22:34 UTC+8.
+
+The human accepted public access for the dedicated `jobmatch` proof of concept. The seed data is fictional. The application has no authentication and no production secrets. This acceptance is limited to this public POC.
+
+It does not authorize the project-wide SSO disable recorded in `docs/execution-log.md` P-022. That command had no separate approval when it was run. `artifacts/reviews/security-review-remediation.md` remains the original finding.
+
+The same approval authorized deletion of production deployment `dpl_5ivwshQAPh9LYLGv3Xp3Cq9jd7mV` only, preservation of preview `dpl_2rkSWN7UuCfBjTSo842fmiZz7For`, and revocation of the G4 automation protection-bypass secret if it belonged only to this POC. Results are in `artifacts/reviews/security-post-audit-vercel.md`. SSO was not enabled. No deployment was created.
